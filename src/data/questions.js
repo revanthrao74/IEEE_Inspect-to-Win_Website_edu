@@ -1,35 +1,3 @@
-// export const questions = [
-//   {
-//     id: 1,
-//     question: "You are currently staring at the answer",
-//     options: ["BLUE", "RED", "SAME_AS_BODY", "WHITE"],
-//     correct: "SAME_AS_BODY",
-//     type: "css-hidden"
-//   },
-//   {
-//     id: 2,
-//     question: "You’ll find the answer when the image fails to load",
-//     options: ["404", "ALT_TEXT", "BROKEN_IMG", "SRC_ERROR"],
-//     correct: "ALT_TEXT",
-//     type: "image-alt"
-//   },
-//   {
-//     id: 3,
-//     question: "The developer left a note for himself",
-//     options: ["TODO", "COMMENT", "DEBUG", "NOTE"],
-//     correct: "COMMENT",
-//     type: "comment"
-//   },
-//   {
-//     id: 4,
-//     question: "Too fast for the eyes. Slow it down.",
-//     options: ["PAUSE_JS", "REFRESH", "ZOOM", "WAIT"],
-//     correct: "PAUSE_JS",
-//     type: "blinking"
-//   }
-// ];
-
-
 const questions = [
   {
     id: 1,

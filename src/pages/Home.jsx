@@ -20,10 +20,10 @@ export default function Home() {
       </p>
 
       <ul>
-        <li>⏱ Max Time: 10 Minutes</li>
+        <li>⏱ Max Time: 15 Minutes</li>
         <li>🔀 Questions & options are randomized</li>
         <li>🛠 DevTools allowed & encouraged</li>
-        <li>🚫 No refresh</li>
+        <li>🚫 Using Third party apps are not Encouraged </li>
       </ul>
 
       <button onClick={startGame} className="start-btn">

@@ -4,9 +4,8 @@ import questions from "../data/questions";
 import { shuffle } from "../utils/shuffle";
 import QuestionPanel from "../components/QuestionPanel";
 import CluePanel from "../components/CluePanel";
-import { useGame } from "../context/GameContext";
 import ProgressBar from "../components/ProgressBar";
-
+import { useGame } from "../context/GameContext";
 
 /* -------------------------------
    LOCK QUESTION ORDER PER SESSION
@@ -18,32 +17,51 @@ const shuffledQuestions = storedQuestions
   : shuffle(questions);
 
 if (!storedQuestions) {
-  sessionStorage.setItem(
-    "questionOrder",
-    JSON.stringify(shuffledQuestions)
-  );
+  sessionStorage.setItem("questionOrder", JSON.stringify(shuffledQuestions));
 }
 
 export default function Game() {
   const navigate = useNavigate();
-  const { setCompleted, timeLeft } = useGame();
+  const { timeLeft, setCompleted } = useGame();
 
-  /* -------------------------------
-     RESTORE CURRENT QUESTION INDEX
-  -------------------------------- */
   const [index, setIndex] = useState(
     Number(sessionStorage.getItem("currentIndex")) || 0
   );
 
+  // Restore scoreboard values
+  const [attempted, setAttempted] = useState(
+    Number(sessionStorage.getItem("attempted")) || 0
+  );
+
+  const [correctCount, setCorrectCount] = useState(
+    Number(sessionStorage.getItem("correctCount")) || 0
+  );
+
+  const [incorrectCount, setIncorrectCount] = useState(
+    Number(sessionStorage.getItem("incorrectCount")) || 0
+  );
+
   /* -------------------------------
-     PERSIST INDEX ON CHANGE
+     STORE START TIME ONLY ONCE
+  -------------------------------- */
+  useEffect(() => {
+    if (!sessionStorage.getItem("startTime")) {
+      sessionStorage.setItem("startTime", Date.now());
+    }
+  }, []);
+
+  /* -------------------------------
+     SAVE EVERYTHING
   -------------------------------- */
   useEffect(() => {
     sessionStorage.setItem("currentIndex", index);
-  }, [index]);
+    sessionStorage.setItem("attempted", attempted);
+    sessionStorage.setItem("correctCount", correctCount);
+    sessionStorage.setItem("incorrectCount", incorrectCount);
+  }, [index, attempted, correctCount, incorrectCount]);
 
   /* -------------------------------
-     AUTO DISQUALIFY IF TIME UP
+     TIME UP → GO TO RESULT
   -------------------------------- */
   useEffect(() => {
     if (timeLeft === 0) {
@@ -53,19 +71,39 @@ export default function Game() {
   }, [timeLeft, navigate, setCompleted]);
 
   /* -------------------------------
-     HANDLE CORRECT ANSWER
+     NEXT QUESTION FUNCTION
   -------------------------------- */
-  const handleCorrect = () => {
-    if (index + 1 >= shuffledQuestions.length) {
+  const goNext = () => {
+    const nextIndex = index + 1;
+
+    // Save immediately
+    sessionStorage.setItem("currentIndex", nextIndex);
+
+    if (nextIndex >= shuffledQuestions.length) {
       setCompleted(true);
       navigate("/result");
     } else {
-      setIndex(index + 1);
+      setIndex(nextIndex);
     }
   };
 
   /* -------------------------------
-     SAFETY CHECK (EDGE CASE)
+     CORRECT / WRONG HANDLERS
+  -------------------------------- */
+  const handleCorrect = () => {
+    setAttempted((prev) => prev + 1);
+    setCorrectCount((prev) => prev + 1);
+    goNext();
+  };
+
+  const handleWrong = () => {
+    setAttempted((prev) => prev + 1);
+    setIncorrectCount((prev) => prev + 1);
+    goNext();
+  };
+
+  /* -------------------------------
+     SAFETY CHECK
   -------------------------------- */
   if (!shuffledQuestions[index]) {
     navigate("/result");
@@ -74,88 +112,29 @@ export default function Game() {
 
   return (
     <>
-    <ProgressBar
-      current={index}
-      total={shuffledQuestions.length}
-    />
+      <ProgressBar current={index} total={shuffledQuestions.length} />
 
-    <div className="game-layout">
-      <QuestionPanel
-        data={shuffledQuestions[index]}
-        onCorrect={handleCorrect}
-      />
-      <CluePanel type={shuffledQuestions[index].type} />
-    </div>
-  </>
+      <div className="question-status-bar">
+        <p>
+          Question <b>{index + 1}</b> / <b>{shuffledQuestions.length}</b>
+        </p>
+        <p>
+          Completed: <b>{index}</b> | Left:{" "}
+          <b>{shuffledQuestions.length - index}</b>
+        </p>
+      </div>
+
+      <div className="game-layout">
+        <QuestionPanel
+          data={shuffledQuestions[index]}
+          onCorrect={handleCorrect}
+          onWrong={handleWrong}
+          questionNo={index + 1}
+          totalQuestions={shuffledQuestions.length}
+        />
+
+        <CluePanel type={shuffledQuestions[index].type} />
+      </div>
+    </>
   );
 }
-
-
-
-
-// import { useNavigate } from "react-router-dom";
-// import { useGame } from "../context/GameContext";
-
-// export default function Game() {
-//   const navigate = useNavigate();
-//   const { setCompleted } = useGame();
-//   const [index, setIndex] = useState(0);
-
-  
-
-//   const handleCorrect = () => {
-//     if (index + 1 >= shuffledQuestions.length) {
-//       setCompleted(true);
-//       navigate("/result");
-//     } else {
-//       setIndex(index + 1);
-//     }
-//   };
-
-  
-
-//   return (
-//     <>
-//       <Timer />
-//       <div className="game-layout">
-//         <QuestionPanel
-//           data={shuffledQuestions[index]}
-//           onCorrect={handleCorrect}
-//         />
-//         <CluePanel type={shuffledQuestions[index].type} />
-//       </div>
-//     </>
-//   );
-// }
-
-
-
-
-
-
-
-// import { useState } from "react";
-// import  questions  from "../data/questions";   //"../data/questions
-// import { shuffle } from "../utils/shuffle";
-// import QuestionPanel from "../components/QuestionPanel";
-// import CluePanel from "../components/CluePanel";
-// import Timer from "../components/Timer";
-
-// const shuffledQuestions = shuffle(questions);
-
-// export default function Game() {
-//   const [index, setIndex] = useState(0);
-
-//   return (
-//     <>
-//       <Timer />
-//       <div className="game-layout">
-//         <QuestionPanel
-//           data={shuffledQuestions[index]}
-//           onCorrect={() => setIndex(index + 1)}
-//         />
-//         <CluePanel type={shuffledQuestions[index].type} />
-//       </div>
-//     </>
-//   );
-// }
