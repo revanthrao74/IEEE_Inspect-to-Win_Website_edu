@@ -799,3 +799,122 @@ button {
     font-size: 2.6rem;
   }
 }
+
+
+/* =========================
+   ICE BREAKER BUTTON
+========================= */
+
+.ice-btn {
+  position: fixed;
+  top: 16px;
+  left: 24px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  background: linear-gradient(90deg, #f97316, #fb7185);
+  color: white;
+  box-shadow: 0 18px 40px rgba(249, 115, 22, 0.3);
+  z-index: 999;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.ice-btn:hover {
+  transform: translateY(-2px);
+}
+
+.ice-btn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* =========================
+   ICE BREAKER MODAL
+========================= */
+
+.ice-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  animation: fadeOverlay 0.3s ease;
+}
+
+@keyframes fadeOverlay {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.ice-card {
+  width: min(650px, 92%);
+  max-height: 80vh;
+  overflow-y: auto;
+  background: linear-gradient(135deg, #ffffff, #fff7ed);
+  border-radius: 26px;
+  padding: 34px;
+  box-shadow: 0 30px 80px rgba(15, 23, 42, 0.25);
+  animation: popIce 0.5s ease;
+}
+
+@keyframes popIce {
+  from {
+    transform: translateY(30px) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px) scale(1);
+    opacity: 1;
+  }
+}
+
+.ice-card h2 {
+  font-size: 1.8rem;
+  font-weight: 900;
+  margin-bottom: 10px;
+  background: linear-gradient(90deg, #f97316, #fb7185);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.ice-timer {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #ea580c;
+  margin-bottom: 22px;
+}
+
+.ice-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ice-question {
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: inset 0 0 0 1px rgba(251, 146, 60, 0.25);
+  font-weight: 600;
+  color: #334155;
+  transition: transform 0.2s ease;
+}
+
+.ice-question:hover {
+  transform: translateX(6px);
+}
+
+.ice-note {
+  margin-top: 20px;
+  font-weight: 700;
+  color: #475569;
+}
+
