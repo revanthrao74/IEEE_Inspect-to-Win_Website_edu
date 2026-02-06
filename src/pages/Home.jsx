@@ -12,8 +12,13 @@ export default function Home() {
 
   return (
     <div className="home">
+      <div className="logos">
+      <img height="120px" width="150px" src="./public/IEEE Edsoc LOGO.png"></img>
+      <img height="120px" width="150px" src="IEEE PES LOGO.png"></img>
+      <img height="120px" width="150px" src="IEEE RAS LOGO.png"></img>
+      <img height="120px" width="150px" src="IEEE AESS LOGO.png"></img>
+      </div>
       <h1>🔍 Inspect to Win</h1>
-
       <p>
         A fast-paced interactive event where your debugging skills are tested.
         Use Inspect Element, DevTools, React DevTools, and logic to uncover hidden clues.

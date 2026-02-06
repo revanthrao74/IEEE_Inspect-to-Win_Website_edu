@@ -918,3 +918,10 @@ button {
   color: #475569;
 }
 
+.logos {
+  display: flex;
+  align-items: center; /* Vertically centers the images */
+  justify-content: center; /* Horizontally centers the group in the div */
+  gap: 130px; /* Sets exactly 30px of space between each image */
+}
+
