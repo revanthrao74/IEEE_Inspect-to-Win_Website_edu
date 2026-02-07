@@ -1,5 +1,3 @@
-
-
 export default function CluePanel({ type }) {
   if (type === "blinking") {
     return (
