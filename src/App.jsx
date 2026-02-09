@@ -4,7 +4,7 @@ import Game from "./pages/Game";
 import Result from "./pages/Result";
 import ApiDocs from "./pages/docs/ApiDocs";
 import DeprecatedDocs from "./pages/docs/DeprecatedDocs";
-import SessionLogs from "./pages/logs/SessionLogs";
+// import SessionLogs from "./pages/logs/SessionLogs";
 import Experimental from "./pages/playground/Experimental";
 import Settings from "./pages/profile/Settings";
 import NotFoundUseful from "./pages/NotFoundUseful";
@@ -27,7 +27,7 @@ export default function App() {
         {/* Maze Pages */}
         <Route path="/docs/api" element={<ApiDocs />} />
         <Route path="/docs/deprecated" element={<DeprecatedDocs />} />
-        <Route path="/logs/session" element={<SessionLogs />} />
+        {/* <Route path="/logs/session" element={<SessionLogs />} /> */}
         <Route path="/playground/experimental" element={<Experimental />} />
         <Route path="/profile/settings" element={<Settings />} />
 

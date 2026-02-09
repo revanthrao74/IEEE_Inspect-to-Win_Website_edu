@@ -22,14 +22,21 @@ export default function Home() {
 
   return (
     <div className="home">
-       <div className="logos">
-       <img height="120px" width="150px" src="IEEE CBIT LOGO.jpg"></img>
-       <img height="120px" width="150px" src="IEEE EdSoc LOGO.png"></img>
-       <img height="120px" width="150px" src="IEEE PES LOGO.png"></img>
-       <img height="120px" width="150px" src="IEEE RAS LOGO.png"></img>
-       <img height="120px" width="150px" src="IEEE AESS LOGO.png"></img>
-       </div>
-      <h1>🔍 Inspect To Win</h1>
+      <div className="logos">
+        <img height="60px" src="IEEE EdSoc LOGO.png" alt="IEEE EdSoc"></img>
+        <img height="60px" src="IEEE PES LOGO.png" alt="IEEE PES"></img>
+        <img height="60px" src="IEEE RAS LOGO.png" alt="IEEE RAS"></img>
+        <img height="60px" src="IEEE AESS LOGO.png" alt="IEEE AESS"></img>
+      </div>
+
+      <div className="titles">
+        <h1 className="main-title">UDHBAVA 3.0</h1>
+        <h2 className="sub-title">Stratos Round 2</h2>
+        <h2 className="event-name">🔍 Inspect To Win</h2>
+      </div>
+
+
+
 
       <p>
         Welcome to Inspect To Win! A fun debugging challenge where you must use

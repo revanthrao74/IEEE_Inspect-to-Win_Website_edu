@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { useGame } from "../context/GameContext";
-import questions from "../data/questions";
 
 export default function Result() {
   const navigate = useNavigate();
@@ -20,7 +19,8 @@ export default function Result() {
   const correctCount = Number(sessionStorage.getItem("correctCount")) || 0;
   const incorrectCount = Number(sessionStorage.getItem("incorrectCount")) || 0;
 
-  const totalQuestions = questions.length;
+  const questionOrder = JSON.parse(sessionStorage.getItem("questionOrder")) || [];
+  const totalQuestions = questionOrder.length || 10;
 
   // PERFECT TIME TAKEN (MATCHES SCREEN TIMER)
   const timeTakenSeconds = MAX_TIME - timeLeft;
@@ -48,9 +48,9 @@ export default function Result() {
   return (
     <div className="result">
       {success ? (
-        <h1>🎉 Congratulations!</h1>
+        <h1>🎉 Congratulations! 🎉</h1>
       ) : (
-        <h1>⏱ Better Luck Next Time!</h1>
+        <h1> 💕 Thankyou for Participating 💕</h1>
       )}
 
       <div className="score-card">

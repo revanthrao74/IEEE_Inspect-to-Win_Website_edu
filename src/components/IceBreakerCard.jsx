@@ -133,7 +133,13 @@ export default function IceBreakerCard({ onClose }) {
   return (
     <div className="ice-overlay">
       <div className="ice-card">
-        <h2>🎭 Chill Break</h2>
+        <div className="ice-header">
+          <h2>🎭 Chill Break</h2>
+          <button className="ice-skip-btn" onClick={onClose}>
+            Skip ⏭️
+          </button>
+        </div>
+
         <input type="hidden" value="superHidden777" id="hiddenKey"></input>
         <p className="ice-timer">
           Relax Time Left: {minutes}:{seconds.toString().padStart(2, "0")}
@@ -147,7 +153,7 @@ export default function IceBreakerCard({ onClose }) {
         </div>
 
         <p className="ice-note">
-           Relax 😌 Timer is paused. Game resumes automatically when chill time ends.Refresh the page to Magic.
+          Relax 😌 Timer is paused. Game resumes automatically when chill time ends. Refresh the page to Magic.
         </p>
       </div>
     </div>

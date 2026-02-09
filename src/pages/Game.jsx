@@ -187,7 +187,7 @@ export default function Game() {
           totalQuestions={shuffledQuestions.length}
         />
 
-        <CluePanel type={shuffledQuestions[index].type} />
+        <CluePanel type={shuffledQuestions[index].type} hints={shuffledQuestions[index].hints} />
       </div>
     </>
   );
